@@ -1,0 +1,15 @@
+#PBS -S /bin/bash
+#PBS -m bea
+#PBS -q express
+#PBS -l nodes=20:ppn=8
+#PBS -l walltime=0:30:00
+######\#PBS -M apz11@c3sl.ufpr.br 
+
+#module load intel/5.0.3.048
+module load gcc/4.9 mvapich2/2.2
+
+#cat /proc/self/status
+mpirun -v -np 144  /home/apz11/gol/gol 1000 1000 12 12 100
+
+exit 0
+
