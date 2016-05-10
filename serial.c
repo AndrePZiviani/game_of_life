@@ -16,6 +16,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define TRUE 1
+#define FALSE 0
+
 int linha,coluna,**board,*dboard,**newboard,*dnboard;
 /* set everthing to zero */
 
@@ -61,7 +64,7 @@ int adjacent_to (int **board, int i, int j) {
     return count;
 }
 
-void play (int **board) {
+void play (int **old, int**new) {
 /*
     (copied this from some web page, hence the English spellings...)
 
@@ -75,20 +78,17 @@ void play (int **board) {
     3.DEATH : If the number of on neighbours is 0, 1, 4-8, the cell will 
     be off in the next generation.
 */
-    int i, j, a;
+    int i, j, count;
 
     /* for each cell, apply the rules of Life */
-
-    for (i=0; i<linha; i++)
-        for (j=0; j<coluna; j++) {
-            a = adjacent_to (board, i, j);
-            if (a == 2) newboard[i][j] = board[i][j];
-            if (a == 3) newboard[i][j] = 1;
-            if (a < 2) newboard[i][j] = 0;
-            if (a > 3) newboard[i][j] = 0;
-        }
-
-    /* copy the new board back into the old board */
+    for (i=1; i<linha-1; ++i)
+         for (j=1; j<coluna-1; ++j) {
+             count = old[i-1][j-1] + old[i-1][j] + old[i-1][j+1] +
+                     old[i][j-1]   +               old[i][j+1]   +
+                     old[i+1][j-1] + old[i+1][j] + old[i+1][j+1];
+             result[2] = old[i][j];
+             new[i][i] = result[count];
+         } 
 
 }
 
