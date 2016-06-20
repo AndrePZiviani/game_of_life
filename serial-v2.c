@@ -160,7 +160,7 @@ double timestamp(void){
 int main (int argc, char *argv[]) {
     int size,iter,tmp[2],coord[2];
 
-    double inicio, primeiro, fim=0, aux;
+    double inicio, primeiro, init, fim=0, aux;
 
     inicio = timestamp();
 
@@ -202,9 +202,12 @@ int main (int argc, char *argv[]) {
         result[i] = 0;
     result[3] = 1;
 
-    initialize_board (m,linha,coluna);
-
     primeiro = timestamp() - inicio;
+
+    init = timestamp();
+    initialize_board (m,linha,coluna);
+    init = timestamp() - init;
+
 
     int i=0;
     for (i=0; i<iter; i++) {
@@ -247,8 +250,9 @@ int main (int argc, char *argv[]) {
     free(n_data);
     free(n);
 
-    fp = fopen("statistics.out","w");
-    fprintf (fp,"Tempo de inicializacao: %e\nTempo Medio por Iteracao: %e\nTempo Total: %e\n",primeiro,fim/iter,timestamp()-inicio);
+    sprintf (file, "%s.stat",argv[0]);
+    fp = fopen(file,"w");
+    fprintf (fp,"Tempo de mallocs: %e\nTempo de Inicializacao: %e\nTempo Medio por Iteracao: %e\nTempo Total: %e\n",primeiro,init,fim/iter,timestamp()-inicio);
     fflush(fp);
     fclose(fp);
 
