@@ -201,12 +201,12 @@ int main (int argc, char *argv[]) {
     m_data = malloc (linha * coluna * sizeof(int));
     m = malloc (linha * sizeof(int *));
     for (int i=0;i<linha;++i)
-        m[i] = &m_data[i*linha];
+        m[i] = &m_data[i*coluna];
 
     n_data = malloc (linha * coluna * sizeof(int));
     n = malloc (linha * sizeof(int *));
     for (int i=0;i<linha;++i)
-        n[i] = &n_data[i*linha];
+        n[i] = &n_data[i*coluna];
 
     mprint = malloc ((linha * (coluna + 2) * sizeof(int)) + 2);
 
